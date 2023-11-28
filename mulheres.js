@@ -1,12 +1,14 @@
 const express = require("express")
 const router = express.Router()
+const {v4: uuidv4} = required('uuid')
+
 const app = express()
 const porta = 3333
 
 const mulheres = [
 
     {
-
+        id: '1',
         nome: 'Simara Conceição',
         imagem: 'https://bit.ly/3LJIyOF',
         minibio: 'Desenvolvedora e instrutora',
@@ -14,7 +16,7 @@ const mulheres = [
     },
 
     {
-
+        id: '1',
         nome: 'Iana Chan',
         imagem: 'https://bit.ly/3JCXBqP',
         minibio: 'CEO & Founder da PrograMaria',
@@ -22,7 +24,7 @@ const mulheres = [
     },
 
     {
-
+        id: '3',
         nome: 'Luana Pimentel',
         imagem: 'https://bit.ly/3FKpFaz',
         minibio: 'Senior Staff Software Engineer',
@@ -30,6 +32,19 @@ const mulheres = [
     }
 
 ]
+
+function criaMulher(request, response) {
+    const novaMulher = {
+        id: uuidv4(),
+        nome: request.body.nome,
+        imagem: request.body.imagem,
+        minibio: request.body.minibio,
+    }
+
+    mulheres.push(novaMulher)
+
+    response.json(mulheres)
+}
 
 function mostraMulheres(request, response) {
 
@@ -44,5 +59,5 @@ function mostraPorta() {
 }
 
 app.use(router.get('/mulheres', mostraMulheres))
-
+app.use(router.post('/mulheres', criaMulher))
 app.listen(porta, mostraPorta)
