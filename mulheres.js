@@ -50,7 +50,7 @@ async function corrigeMulher(request, response) {
         }
     
         if (request.body.imagem) {
-            mulherEncontrada = request.body.imagem
+            mulherEncontrada.imagem= request.body.imagem
         }
     
         if (request.body.minibio) {
@@ -58,7 +58,7 @@ async function corrigeMulher(request, response) {
         }
 
         if (request.body.citacao) {
-            mulherEncontrada = request.body.citacao
+            mulherEncontrada.citacao = request.body.citacao
         }
 
         const mulherAtualizadaNoBancoDeDados = await mulherEncontrada.save()
